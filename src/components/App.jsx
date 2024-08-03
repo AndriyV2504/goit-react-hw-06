@@ -5,7 +5,7 @@ import SearchBox from "./SearchBox/SearchBox";
 const App = () => {
   return (
     <div>
-      <h1>PHONEBOOK</h1>
+      <h1>PhoneBook</h1>
       <ContactForm />
       <SearchBox />
       <ContactList />
