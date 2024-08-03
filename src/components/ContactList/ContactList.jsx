@@ -11,13 +11,13 @@ const ContactList = () => {
   );
 
   return (
-    <div>
+    <ul>
       {filterContacts.map((contact) => (
         <li key={contact.id}>
           <Contact data={contact} />
         </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

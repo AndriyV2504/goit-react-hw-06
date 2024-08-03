@@ -1,4 +1,4 @@
-import { ADD_CONTACT, CHANGE_FILTER, DELETE_CONTACT } from "./constants";
+import { addContact, changeFilter, deleteContact } from "./actions";
 
 const initialState = {
   contacts: [
@@ -14,7 +14,7 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_CONTACT:
+    case addContact.type:
       return {
         ...state,
         contacts: {
@@ -22,7 +22,7 @@ const rootReducer = (state = initialState, action) => {
           items: [...state.contacts.items, action.payload],
         },
       };
-    case DELETE_CONTACT:
+    case deleteContact.type:
       return {
         ...state,
         contacts: {
@@ -32,7 +32,7 @@ const rootReducer = (state = initialState, action) => {
           ),
         },
       };
-    case CHANGE_FILTER:
+    case changeFilter.type:
       return {
         ...state,
         filters: {
