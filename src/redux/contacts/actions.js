@@ -1,5 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
+import { ADD_CONTACT, CHANGE_FILTER, DELETE_CONTACT } from "./constants";
 
-export const addContact = createAction("addContact");
-export const deleteContact = createAction("deleteContact");
-export const changeFilter = createAction("changeFilter");
+export const addContact = createAction(ADD_CONTACT);
+export const deleteContact = createAction(DELETE_CONTACT);
+export const changeFilter = createAction(CHANGE_FILTER);

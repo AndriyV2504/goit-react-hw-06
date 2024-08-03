@@ -1,3 +1,4 @@
+import { createReducer } from "@reduxjs/toolkit";
 import { addContact, changeFilter, deleteContact } from "./actions";
 
 const initialState = {
@@ -12,37 +13,60 @@ const initialState = {
   },
 };
 
-const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case addContact.type:
-      return {
-        ...state,
-        contacts: {
-          ...state.contacts,
-          items: [...state.contacts.items, action.payload],
-        },
-      };
-    case deleteContact.type:
-      return {
-        ...state,
-        contacts: {
-          ...state.contacts,
-          items: state.contacts.items.filter(
-            (contact) => contact.id !== action.payload
-          ),
-        },
-      };
-    case changeFilter.type:
-      return {
-        ...state,
-        filters: {
-          ...state.filters,
-          name: action.payload,
-        },
-      };
-    default:
-      return state;
-  }
+const contactsReducer = createReducer(initialState.contacts, (builder) => {
+  builder
+    .addCase(addContact, (state, action) => {
+      state.items.push(action.payload);
+    })
+    .addCase(deleteContact, (state, action) => {
+      state.items = state.items.filter(
+        (contact) => contact.id !== action.payload
+      );
+    });
+});
+
+const filtersReducer = createReducer(initialState.filters, (builder) => {
+  builder.addCase(changeFilter, (state, action) => {
+    state.name = action.payload;
+  });
+});
+
+const rootReducer = {
+  contacts: contactsReducer,
+  filters: filtersReducer,
 };
+
+// const rootReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case addContact.type:
+//       return {
+//         ...state,
+//         contacts: {
+//           ...state.contacts,
+//           items: [...state.contacts.items, action.payload],
+//         },
+//       };
+//     case deleteContact.type:
+//       return {
+//         ...state,
+//         contacts: {
+//           ...state.contacts,
+//           items: state.contacts.items.filter(
+//             (contact) => contact.id !== action.payload
+//           ),
+//         },
+//       };
+//     case changeFilter.type:
+//       return {
+//         ...state,
+//         filters: {
+//           ...state.filters,
+//           name: action.payload,
+//         },
+//       };
+//     default:
+//       return state;
+//   }
+// };
 
 export default rootReducer;
